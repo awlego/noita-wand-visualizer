@@ -1,0 +1,241 @@
+.deck-state-visualization {
+  background-color: var(--panel-brown);
+  border: 2px solid var(--border-gold);
+  border-radius: 6px;
+  padding: 16px;
+  min-height: 200px;
+}
+
+.deck-state-visualization__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.deck-state-visualization__header h3 {
+  margin: 0;
+  color: var(--text-tan);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.deck-state-visualization__status {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-ready {
+  color: var(--spell-multicast);
+}
+
+.status-recharging {
+  color: #e74c3c;
+  animation: pulse-status 1s ease-in-out infinite alternate;
+}
+
+.status-delay {
+  color: #f39c12;
+  animation: pulse-status 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-status {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+.deck-state-visualization__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.deck-pile {
+  background-color: var(--slot-brown);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 8px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.pile-title {
+  font-weight: 600;
+  color: var(--text-tan);
+  font-size: 12px;
+}
+
+.pile-count {
+  background-color: var(--border-gold);
+  color: var(--bg-dark);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.pile-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pile-empty {
+  text-align: center;
+  color: var(--text-tan);
+  opacity: 0.5;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.spell-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.spell-hand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spell-card {
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 40px;
+  justify-content: center;
+}
+
+.spell-card--small {
+  min-height: 20px;
+  padding: 2px 4px;
+}
+
+.spell-card__name {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-tan);
+  text-align: center;
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.spell-card--small .spell-card__name {
+  font-size: 8px;
+}
+
+.spell-card__details {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.spell-card__mana {
+  font-size: 7px;
+  color: #4fc3f7;
+  font-weight: 500;
+}
+
+.spell-card__delay {
+  font-size: 7px;
+  color: #ffb74d;
+  font-weight: 500;
+}
+
+.spell-stack-more {
+  text-align: center;
+  color: var(--text-tan);
+  opacity: 0.7;
+  font-size: 8px;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.deck-state-visualization__info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-gold);
+  flex-wrap: wrap;
+}
+
+.deck-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 10px;
+  color: var(--text-tan);
+  opacity: 0.8;
+}
+
+.info-value {
+  font-size: 11px;
+  color: var(--text-tan);
+  font-weight: 600;
+}
+
+/* Specific pile styling */
+.deck-content {
+  position: relative;
+}
+
+.hand-content {
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+.discard-content {
+  background-color: rgba(95, 165, 166, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .deck-state-visualization__content {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .deck-pile {
+    min-height: 80px;
+  }
+  
+  .spell-hand {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .spell-card {
+    flex: 1;
+    min-width: 60px;
+  }
+  
+  .deck-state-visualization__info {
+    justify-content: space-around;
+  }
+}

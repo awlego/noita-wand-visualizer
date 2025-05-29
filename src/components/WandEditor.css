@@ -90,78 +90,7 @@
   color: white;
 }
 
-.wand-editor__cast-history {
-  background-color: var(--panel-brown);
-  border: 2px solid var(--border-gold);
-  border-radius: 6px;
-  padding: 16px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.wand-editor__cast-history h3 {
-  margin: 0 0 12px 0;
-  color: var(--text-tan);
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cast-history {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.cast-history__entry {
-  background-color: var(--slot-brown);
-  border: 1px solid var(--border-gold);
-  border-radius: 4px;
-  padding: 10px;
-}
-
-.cast-history__header {
-  font-weight: 600;
-  color: var(--text-tan);
-  margin-bottom: 6px;
-  font-size: 14px;
-}
-
-.cast-history__details {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 6px;
-  font-size: 11px;
-  color: var(--text-tan);
-  opacity: 0.8;
-}
-
-.cast-history__spells {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 6px;
-}
-
-.cast-history__spell {
-  font-size: 10px;
-  padding: 2px 6px;
-  background-color: var(--spell-modifier);
-  color: white;
-  border-radius: 3px;
-  font-weight: 500;
-}
-
-.cast-history__projectiles {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cast-history__projectile {
-  font-size: 10px;
-  color: var(--spell-projectile);
-  font-weight: 500;
-}
+/* Removed old cast history styles - now using CastSequenceVisualization */
 
 /* Responsive design */
 @media (max-width: 1200px) {

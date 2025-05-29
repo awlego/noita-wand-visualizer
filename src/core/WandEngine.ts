@@ -277,13 +277,7 @@ export class WandEngine {
     this.wand.isRecharging = true;
     this.wand.rechargeTimer = this.wand.stats.rechargeTime;
     
-    // Move all discard back to deck
-    this.wand.deck = [...this.wand.discard];
-    this.wand.discard = [];
-    
-    if (this.wand.stats.shuffle) {
-      this.shuffleDeck();
-    }
+    // DON'T move discard back to deck immediately - wait for recharge to complete
   }
 
   public update(deltaTime: number): void {
@@ -301,6 +295,14 @@ export class WandEngine {
       if (this.wand.rechargeTimer <= 0) {
         this.wand.isRecharging = false;
         this.wand.rechargeTimer = 0;
+        
+        // NOW move discard back to deck when recharge completes
+        this.wand.deck = [...this.wand.discard];
+        this.wand.discard = [];
+        
+        if (this.wand.stats.shuffle) {
+          this.shuffleDeck();
+        }
       }
     }
 

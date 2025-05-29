@@ -5,25 +5,29 @@ import { addSpellToWand, removeSpellFromWand } from '../utils/wandFactory';
 import { Wand, Spell, CastBlock } from '../types';
 import WandSlotGrid from './WandSlotGrid';
 import SpellLibrary from './SpellLibrary';
+import CastSequenceVisualization from './CastSequenceVisualization';
+import DeckStateVisualization from './DeckStateVisualization';
 import './WandEditor.css';
 
 export const WandEditor: React.FC = () => {
   const [wand, setWand] = useState<Wand>(createDefaultWand());
   const [engine, setEngine] = useState<WandEngine | null>(null);
   const [castHistory, setCastHistory] = useState<CastBlock[]>([]);
+  const [wandDisplayState, setWandDisplayState] = useState<Wand>(createDefaultWand());
 
-  // Initialize engine when wand changes
+  // Initialize engine when wand configuration changes (spells/stats only)
   useEffect(() => {
     const newEngine = new WandEngine(wand);
     setEngine(newEngine);
-  }, [wand]);
+    setWandDisplayState(newEngine.getWandState());
+  }, [JSON.stringify(wand.spells), JSON.stringify(wand.stats)]); // Use JSON.stringify for deep comparison
 
-  // Update wand state from engine
+  // Update display state from engine (for timers, mana, deck state)
   useEffect(() => {
     if (engine) {
       const interval = setInterval(() => {
         engine.update(0.016); // ~60fps updates
-        setWand(engine.getWandState());
+        setWandDisplayState(engine.getWandState());
       }, 16);
 
       return () => clearInterval(interval);
@@ -105,6 +109,10 @@ export const WandEditor: React.FC = () => {
     setCastHistory([]);
   };
 
+  const handleClearHistory = () => {
+    setCastHistory([]);
+  };
+
   const canCast = engine ? engine.canCast() : false;
 
   return (
@@ -139,43 +147,17 @@ export const WandEditor: React.FC = () => {
               Clear Wand
             </button>
           </div>
+
+          <DeckStateVisualization wand={wandDisplayState} />
         </div>
 
         <div className="wand-editor__right">
           <SpellLibrary />
           
-          {castHistory.length > 0 && (
-            <div className="wand-editor__cast-history">
-              <h3>Cast History</h3>
-              <div className="cast-history">
-                {castHistory.slice(-3).map((cast, i) => (
-                  <div key={cast.id} className="cast-history__entry">
-                    <div className="cast-history__header">
-                      Cast {castHistory.length - 2 + i}
-                    </div>
-                    <div className="cast-history__details">
-                      <div>Mana: {cast.manaCost}♦</div>
-                      <div>Delay: {cast.totalCastDelay.toFixed(2)}s</div>
-                    </div>
-                    <div className="cast-history__spells">
-                      {cast.spells.map((spell, j) => (
-                        <span key={j} className="cast-history__spell">
-                          {spell.name}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="cast-history__projectiles">
-                      {cast.projectiles.map((proj, j) => (
-                        <div key={j} className="cast-history__projectile">
-                          → {proj.sourceSpell.name} (Dmg: {proj.finalStats.damage})
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <CastSequenceVisualization 
+            castHistory={castHistory}
+            onClearHistory={handleClearHistory}
+          />
         </div>
       </div>
     </div>

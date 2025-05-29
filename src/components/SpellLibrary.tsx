@@ -9,7 +9,18 @@ interface SpellLibraryProps {
 }
 
 export const SpellLibrary: React.FC<SpellLibraryProps> = ({ 
-  selectedSpells = ['spark_bolt', 'double_cast', 'triple_cast', 'damage_plus'] 
+  selectedSpells = [
+    // Projectiles for testing sequence
+    'spark_bolt', 'magic_arrow', 'fireball',
+    // Modifiers
+    'damage_plus', 'speed_up', 'heavy_shot', 'add_mana',
+    // Multicasts
+    'double_cast', 'triple_cast',
+    // Triggers
+    'spark_bolt_trigger',
+    // Utilities
+    'chainsaw'
+  ] 
 }) => {
   const spells = selectedSpells
     .map(id => SPELLS[id])
