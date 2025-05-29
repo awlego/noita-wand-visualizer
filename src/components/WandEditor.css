@@ -1,0 +1,195 @@
+.wand-editor {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.wand-editor__panels {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+}
+
+.wand-editor__left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 400px;
+}
+
+.wand-editor__right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.wand-editor__controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wand-editor__button {
+  padding: 10px 20px;
+  border: 2px solid var(--border-gold);
+  border-radius: 6px;
+  background-color: var(--panel-brown);
+  color: var(--text-tan);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.wand-editor__button:hover:not(:disabled) {
+  background-color: var(--border-gold);
+  color: var(--bg-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(212, 165, 116, 0.3);
+}
+
+.wand-editor__button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.wand-editor__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #666;
+}
+
+.wand-editor__button--cast {
+  border-color: var(--spell-projectile);
+}
+
+.wand-editor__button--cast:hover:not(:disabled) {
+  background-color: var(--spell-projectile);
+  color: white;
+}
+
+.wand-editor__button--reset {
+  border-color: var(--spell-utility);
+}
+
+.wand-editor__button--reset:hover:not(:disabled) {
+  background-color: var(--spell-utility);
+  color: var(--bg-dark);
+}
+
+.wand-editor__button--clear {
+  border-color: #e74c3c;
+}
+
+.wand-editor__button--clear:hover:not(:disabled) {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.wand-editor__cast-history {
+  background-color: var(--panel-brown);
+  border: 2px solid var(--border-gold);
+  border-radius: 6px;
+  padding: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.wand-editor__cast-history h3 {
+  margin: 0 0 12px 0;
+  color: var(--text-tan);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cast-history {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cast-history__entry {
+  background-color: var(--slot-brown);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.cast-history__header {
+  font-weight: 600;
+  color: var(--text-tan);
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.cast-history__details {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: var(--text-tan);
+  opacity: 0.8;
+}
+
+.cast-history__spells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.cast-history__spell {
+  font-size: 10px;
+  padding: 2px 6px;
+  background-color: var(--spell-modifier);
+  color: white;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.cast-history__projectiles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cast-history__projectile {
+  font-size: 10px;
+  color: var(--spell-projectile);
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .wand-editor__panels {
+    flex-direction: column;
+  }
+  
+  .wand-editor__left,
+  .wand-editor__right {
+    min-width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .wand-editor {
+    padding: 12px;
+  }
+  
+  .wand-editor__panels {
+    gap: 16px;
+  }
+  
+  .wand-editor__controls {
+    justify-content: stretch;
+  }
+  
+  .wand-editor__button {
+    flex: 1;
+    min-width: unset;
+  }
+}
